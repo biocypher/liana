@@ -5,6 +5,7 @@ import collections
 from typing import Dict, List, Optional
 from enum import Enum, auto
 from functools import lru_cache
+import pandas as pd
 
 from tqdm import tqdm  # progress bar
 from pypath.share import curl, settings
@@ -98,6 +99,8 @@ class Uniprot:
         edge_fields: Optional[list] = None,
         normalise_curies: bool = True,
         test_mode=False,
+        ligand_file: Optional[str] = None,
+        receptor_file: Optional[str] = None,
     ):
 
         # params
@@ -111,14 +114,26 @@ class Uniprot:
         self.data_version = "2022_04"  # TODO get version from pypath
         self.data_licence = "CC BY 4.0"
 
-        self._configure_fields()
+        # data
+        self.ligands = self._read_ligands_set(ligand_file)
+        self.receptors = self._read_receptors_set(receptor_file)
 
+        # fields
+        self._configure_fields()
         self._set_node_and_edge_fields(
             node_types=node_types,
             node_fields=node_fields,
             edge_types=edge_types,
             edge_fields=edge_fields,
         )
+
+    def _read_ligands_set(self, ligand_file) -> set:
+        file = pd.read_csv(ligand_file, header=None)
+        return set(file[0])
+
+    def _read_receptors_set(self, receptor_file) -> set:
+        file = pd.read_csv(receptor_file, header=None)
+        return set(file[0])
 
     def download_uniprot_data(
         self,
@@ -313,8 +328,10 @@ class Uniprot:
 
             protein_props = self._get_protein_properties(all_props)
 
+            protein_type = self._get_ligand_or_receptor(protein_id)
+
             # append protein node to output
-            yield (protein_id, "protein", protein_props)
+            yield (protein_id, protein_type, protein_props)
 
             # append gene node to output if desired
             if UniprotNodeType.GENE in self.node_types:
@@ -556,6 +573,20 @@ class Uniprot:
 
         return protein_props
 
+    def _get_ligand_or_receptor(self, uniprot_id: str) -> str:
+        """
+        Return ligand / receptor status of protein.
+        """
+       
+        uniprot_id = uniprot_id.split(":")[-1]
+
+        if uniprot_id in self.ligands:
+            return 'ligand'    
+        if uniprot_id in self.receptors:
+            return 'receptor'
+        
+        return 'protein' 
+    
     def _split_fields(self, field_key, field_value):
         """
         Split fields with multiple entries in uniprot

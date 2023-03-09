@@ -37,6 +37,8 @@ uniprot_adapter = Uniprot(
         node_types=uniprot_node_types,
         node_fields=uniprot_node_fields,
         test_mode=True,
+        ligand_file="data/ligands_curated.csv",
+        receptor_file="data/receptors_curated.csv",
     )
 
 uniprot_adapter.download_uniprot_data(cache = True)

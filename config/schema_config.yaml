@@ -5,6 +5,18 @@ protein:
     preferred_id: uniprot
     label_in_input: protein
 
+receptor protein:
+    is_a: protein
+    represented_as: node
+    preferred_id: uniprot
+    label_in_input: receptor
+
+ligand protein:
+    is_a: protein
+    represented_as: node
+    preferred_id: uniprot
+    label_in_input: ligand
+
 disease:
     represented_as: node
     preferred_id: doid
