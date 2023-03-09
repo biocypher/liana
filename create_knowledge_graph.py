@@ -1,10 +1,8 @@
 import biocypher
-from adapter import (
-    ExampleAdapter,
-    ExampleAdapterNodeType,
-    ExampleAdapterEdgeType,
-    ExampleAdapterProteinField,
-    ExampleAdapterDiseaseField,
+from adapters.uniprot_liana import (
+    Uniprot,
+    UniprotNodeType,
+    UniprotNodeField,
 )
 
 # Instantiate the BioCypher driver
@@ -21,42 +19,30 @@ driver.show_ontology_structure()
 
 # Choose node types to include in the knowledge graph.
 # These are defined in the adapter (`adapter.py`).
-node_types = [
-    ExampleAdapterNodeType.PROTEIN,
-    ExampleAdapterNodeType.DISEASE,
+uniprot_node_types = [
+    UniprotNodeType.PROTEIN,
 ]
 
-# Choose protein adapter fields to include in the knowledge graph.
-# These are defined in the adapter (`adapter.py`).
-node_fields = [
-    # Proteins
-    ExampleAdapterProteinField.ID,
-    ExampleAdapterProteinField.SEQUENCE,
-    ExampleAdapterProteinField.DESCRIPTION,
-    ExampleAdapterProteinField.TAXON,
-    # Diseases
-    ExampleAdapterDiseaseField.ID,
-    ExampleAdapterDiseaseField.NAME,
-    ExampleAdapterDiseaseField.DESCRIPTION,
-]
-
-edge_types = [
-    ExampleAdapterEdgeType.PROTEIN_PROTEIN_INTERACTION,
-    ExampleAdapterEdgeType.PROTEIN_DISEASE_ASSOCIATION,
+uniprot_node_fields = [
+    UniprotNodeField.PROTEIN_SECONDARY_IDS,
+    UniprotNodeField.PROTEIN_LENGTH,
+    UniprotNodeField.PROTEIN_MASS,
+    UniprotNodeField.PROTEIN_NAMES,
+    UniprotNodeField.PROTEIN_GENE_NAMES,
 ]
 
 # Create a protein adapter instance
-adapter = ExampleAdapter(
-    node_types=node_types,
-    node_fields=node_fields,
-    edge_types=edge_types,
-    # we can leave edge fields empty, defaulting to all fields in the adapter
-)
+uniprot_adapter = Uniprot(
+        organism="9606",
+        node_types=uniprot_node_types,
+        node_fields=uniprot_node_fields,
+        test_mode=True,
+    )
 
+uniprot_adapter.download_uniprot_data(cache = True)
 
 # Create a knowledge graph from the adapter
-driver.write_nodes(adapter.get_nodes())
-driver.write_edges(adapter.get_edges())
+driver.write_nodes(uniprot_adapter.get_nodes())
 
 # Write admin import statement
 driver.write_import_call()

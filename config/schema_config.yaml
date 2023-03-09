@@ -3,7 +3,7 @@
 protein:
     represented_as: node
     preferred_id: uniprot
-    label_in_input: uniprot_protein
+    label_in_input: protein
 
 disease:
     represented_as: node
