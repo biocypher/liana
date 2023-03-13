@@ -8,11 +8,7 @@ from adapters.uniprot_liana import (
 # Instantiate the BioCypher driver
 # You can use `config/biocypher_config.yaml` to configure the driver or supply
 # settings via parameters below
-driver = biocypher.Driver(
-    user_schema_config_path="config/schema_config.yaml",
-    skip_bad_relationships=True,  # Neo4j admin import option
-    skip_duplicate_nodes=True,  # Neo4j admin import option
-)
+driver = biocypher.Driver()
 
 # Take a look at the ontology structure of the KG according to the schema
 driver.show_ontology_structure()
