@@ -32,7 +32,7 @@ uniprot_adapter = Uniprot(
         organism="9606",
         node_types=uniprot_node_types,
         node_fields=uniprot_node_fields,
-        test_mode=True,
+        test_mode=False,
         ligand_file="data/ligands_curated.csv",
         receptor_file="data/receptors_curated.csv",
     )
