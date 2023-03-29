@@ -1,9 +1,111 @@
-# add your settings here (overriding the defaults)
+Title: BioCypher graph schema configuration file for CROssBAR v2
 
-offline: true
+# ---
+# "Named Things"
+# ---
 
-neo4j_delimiter: "\t"
-neo4j_array_delimiter: "|"
+gene:
+  represented_as: node
+  preferred_id: ncbigene
+  label_in_input: gene
+  properties:    
+    genes: str[]
+    kegg: str[]
+    ensembl: str[]
+    ensembl_gene_ids: str[]
 
-debug: false
-clear_cache: false
+protein:
+  represented_as: node
+  preferred_id: uniprot
+  label_in_input: protein
+  properties:
+    secondary_ids: str[]
+    length: int
+    mass: int
+    protein_names: str[]
+    proteome: str[]
+    organism_id: int
+    ec: str[]
+    virus_hosts: int[]
+
+ligand protein:
+  represented_as: node
+  is_a: protein
+  label_in_input: ligand
+  properties:
+    secondary_ids: str[]
+    length: int
+    mass: int
+    protein_names: str[]
+    proteome: str[]
+    organism_id: int
+    ec: str[]
+    virus_hosts: int[] 
+
+receptor protein:
+  represented_as: node
+  is_a: protein
+  label_in_input: receptor
+  properties:
+    secondary_ids: str[]
+    length: int
+    mass: int
+    protein_names: str[]
+    proteome: str[]
+    organism_id: int
+    ec: str[]
+    virus_hosts: int[] 
+  
+organism taxon:
+  represented_as: node
+  preferred_id: ncbitaxon
+  label_in_input: organism
+  properties:
+    organism: str
+
+cellular component:
+  represented_as: node
+  label_in_input: location
+  
+# ---
+# Associations
+# ---
+
+gene to protein relationship:
+  is_a: gene to gene product relationship
+  represented_as: edge
+  label_as_edge: Encodes
+  preferred_id: id
+  source: gene
+  target: protein
+  label_in_input: Encodes
+  
+protein to organism taxon association:
+  is_a: association
+  represented_as: edge
+  label_as_edge: Belongs_To
+  preferred_id: id
+  source: protein
+  target: organismTaxon
+  label_in_input: Belongs_To  
+  
+post translational interaction:
+  represented_as: edge
+  label_as_edge: Interacts_With
+  preferred_id: id
+  source: protein
+  target: protein
+  label_in_input: Interacts_With
+  properties:    
+    source: str[]
+    pubmed_id: int[]
+    method: str
+    interaction_type: str
+    intact_score: float
+    string_combined_score: int
+    string_physical_combined_score: int    
+    
+protein to cellular component association: 
+  represented_as: edge
+  is_a: association
+  label_in_input: Found_in
