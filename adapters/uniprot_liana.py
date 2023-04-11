@@ -127,11 +127,11 @@ class Uniprot:
         self.locations = set()
 
     def read_ligands_set(self) -> set:
-        ligand_file = pd.read_csv("Ligands.csv",header=None)
+        ligand_file = pd.read_csv("data/ligands_curated.csv",header=None)
         self.ligands = set(ligand_file[0])
 
     def read_receptors_set(self) -> set:
-        receptor_file = pd.read_csv("Receptors.csv",header=None)
+        receptor_file = pd.read_csv("data/receptors_curated.csv",header=None)
         self.receptors = set(receptor_file[0])
 
     def download_uniprot_data(
