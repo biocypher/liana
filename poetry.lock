@@ -976,7 +976,7 @@ test = ["pytest", "pytest-cov"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "edcf77c91a894f5c2a18430c9bfb325f1c3f7dfa30edb107e668f18745f23d3b"
+content-hash = "ddc2d766497ac3f01c867d7231e16618a22a08ecda6fd1944f7469e2d5a5817f"
 
 [metadata.files]
 appdirs = [
@@ -1015,12 +1015,12 @@ beautifulsoup4 = [
     {file = "beautifulsoup4-4.12.2.tar.gz", hash = "sha256:492bbc69dca35d12daac71c4db1bfff0c876c00ef4a2ffacce226d4638eb72da"},
 ]
 biocypher = [
-    {file = "biocypher-0.5.9-py3-none-any.whl", hash = "sha256:53d90c9f50eea26655625650a6e63d6a9178aff1a99b24e8fca33606b80f9fe4"},
-    {file = "biocypher-0.5.9.tar.gz", hash = "sha256:4f2ca26d86d34029d34365cc443a560cdf71c52d0ae3770c03cbbc50da64974a"},
+    {file = "biocypher-0.4.5-py3-none-any.whl", hash = "sha256:32d4d88d097725b1c8d044464489198ffd43af72a50c5f07184e9b23e0cebcd8"},
+    {file = "biocypher-0.4.5.tar.gz", hash = "sha256:e88f82791805e232c4358c32a8629dbb05332244a29ef459679fcea999bd35b7"},
 ]
 bioregistry = [
-    {file = "bioregistry-0.6.108-py3-none-any.whl", hash = "sha256:e9f83faeb454064fc1413f791d2603afd864d2a82da8b9ec44aee1ae291b98fb"},
-    {file = "bioregistry-0.6.108.tar.gz", hash = "sha256:369a1444a2c6f099b5d02d56b25fb2bcbc57d8964021c5ea13dc86f656f3a649"},
+    {file = "bioregistry-0.6.93-py3-none-any.whl", hash = "sha256:7e31dec5683d8766081ccf41ebb5f2f8e6c26191183d937456aad0941d1ab61f"},
+    {file = "bioregistry-0.6.93.tar.gz", hash = "sha256:872d54077dd831d82cade4f24ea51b4af4e706567c560d1bb678837930065fd6"},
 ]
 boltons = [
     {file = "boltons-23.0.0-py2.py3-none-any.whl", hash = "sha256:f716a1b57698a5b19062f3146cb5ce3549904028a2f267c2c0cf584eea3ad75b"},

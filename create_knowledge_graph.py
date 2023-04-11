@@ -1,4 +1,4 @@
-import biocypher
+from biocypher import BioCypher
 from adapters.uniprot_liana import (
     Uniprot,
     UniprotNodeType,
@@ -8,7 +8,7 @@ from adapters.uniprot_liana import (
 # Instantiate the BioCypher driver
 # You can use `config/biocypher_config.yaml` to configure the driver or supply
 # settings via parameters below
-driver = biocypher.Driver()
+bc = BioCypher()
 
 # Choose node types to include in the knowledge graph.
 # These are defined in the adapter (`adapter.py`).
@@ -48,11 +48,11 @@ uniprot_adapter = Uniprot(
 uniprot_adapter.download_uniprot_data(cache = True)
 
 # Create a knowledge graph from the adapter
-driver.write_nodes(uniprot_adapter.get_nodes())
-driver.write_edges(uniprot_adapter.get_edges())
+bc.write_nodes(uniprot_adapter.get_nodes())
+bc.write_edges(uniprot_adapter.get_edges())
 
 # Write admin import statement
-driver.write_import_call()
+bc.write_import_call()
 
 # Check output
-driver.summary()
+bc.summary()
