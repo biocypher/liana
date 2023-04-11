@@ -1,33 +1,102 @@
-# add your desired knowledge graph components here
+gene:
+  represented_as: node
+  preferred_id: ncbigene
+  label_in_input: gene
+  properties:    
+    genes: str[]
+    kegg: str[]
+    ensembl: str[]
+    ensembl_gene_ids: str[]
 
 protein:
-    represented_as: node
-    preferred_id: uniprot
-    label_in_input: protein
-
-receptor protein:
-    is_a: protein
-    represented_as: node
-    preferred_id: uniprot
-    label_in_input: receptor
+  represented_as: node
+  preferred_id: uniprot
+  label_in_input: protein
+  properties:
+    secondary_ids: str[]
+    length: int
+    mass: int
+    protein_names: str[]
+    proteome: str[]
+    organism_id: int
+    ec: str[]
+    virus_hosts: int[]
 
 ligand protein:
-    is_a: protein
-    represented_as: node
-    preferred_id: uniprot
-    label_in_input: ligand
+  represented_as: node
+  is_a: protein
+  label_in_input: ligand
+  properties:
+    secondary_ids: str[]
+    length: int
+    mass: int
+    protein_names: str[]
+    proteome: str[]
+    organism_id: int
+    ec: str[]
+    virus_hosts: int[] 
 
-disease:
-    represented_as: node
-    preferred_id: doid
-    label_in_input: do_disease
+receptor protein:
+  represented_as: node
+  is_a: protein
+  label_in_input: receptor
+  properties:
+    secondary_ids: str[]
+    length: int
+    mass: int
+    protein_names: str[]
+    proteome: str[]
+    organism_id: int
+    ec: str[]
+    virus_hosts: int[] 
+  
+organism taxon:
+  represented_as: node
+  preferred_id: ncbitaxon
+  label_in_input: organism
+  properties:
+    organism: str
+
+cellular component:
+  represented_as: node
+  label_in_input: location
+  
+gene to protein relationship:
+  is_a: gene to gene product relationship
+  represented_as: edge
+  label_as_edge: Encodes
+  preferred_id: id
+  source: gene
+  target: protein
+  label_in_input: Encodes
+  
+protein to organism taxon association:
+  is_a: association
+  represented_as: edge
+  label_as_edge: Belongs_To
+  preferred_id: id
+  source: protein
+  target: organismTaxon
+  label_in_input: Belongs_To  
+  
+post translational interaction:
+  is_a: association
+  represented_as: edge
+  label_as_edge: Interacts_With
+  preferred_id: id
+  source: protein
+  target: protein
+  label_in_input: Interacts_With
+  properties:    
+    source: str[]
+    pubmed_id: int[]
+    method: str
+    interaction_type: str
+    intact_score: float
+    string_combined_score: int
+    string_physical_combined_score: int    
     
-protein interaction:
-    is_a: pairwise molecular interaction
-    represented_as: edge
-    label_in_input: protein_protein_interaction
-
-protein to disease association:
-    is_a: association
-    represented_as: edge
-    label_in_input: protein_disease_association
+protein to cellular component association: 
+  represented_as: edge
+  is_a: association
+  label_in_input: Found_in
