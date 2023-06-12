@@ -5,13 +5,8 @@ from adapters.uniprot_liana import (
     UniprotNodeField,
 )
 
-# Instantiate the BioCypher driver
-# You can use `config/biocypher_config.yaml` to configure the driver or supply
-# settings via parameters below
 bc = BioCypher()
 
-# Choose node types to include in the knowledge graph.
-# These are defined in the adapter (`adapter.py`).
 uniprot_node_types = [
     UniprotNodeType.PROTEIN,
     UniprotNodeType.GENE,
@@ -37,7 +32,6 @@ uniprot_node_fields = [
     UniprotNodeField.PROTEIN_SUBCELLULAR_LOCATION
 ]
 
-# Create a protein adapter instance
 uniprot_adapter = Uniprot(
         organism="9606",
         node_types=uniprot_node_types,
@@ -47,12 +41,8 @@ uniprot_adapter = Uniprot(
 
 uniprot_adapter.download_uniprot_data(cache = True)
 
-# Create a knowledge graph from the adapter
 bc.write_nodes(uniprot_adapter.get_nodes())
 bc.write_edges(uniprot_adapter.get_edges())
 
-# Write admin import statement
 bc.write_import_call()
-
-# Check output
 bc.summary()
