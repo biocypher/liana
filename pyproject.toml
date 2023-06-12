@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "biocypher-project-template"
+name = "LIANA KG"
 version = "0.1.0"
-description = "Template for creating a BioCypher-driven knowledge graph"
+description = "BioCypher-driven knowledge graph for LIANA applications"
 authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
 license = "MIT"
 readme = "README.md"
@@ -13,6 +13,7 @@ tqdm = "^4.65.0"
 bioregistry = "^0.6.93"
 pypath-omnipath = "^0.14.44"
 psutil = "^5.9.4"
+otar-biocypher = { git = "https://github.com/biocypher/open-targets.git", branch = "main" }
 
 [build-system]
 requires = ["poetry-core"]

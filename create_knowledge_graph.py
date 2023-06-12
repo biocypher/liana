@@ -4,6 +4,16 @@ from adapters.uniprot_liana import (
     UniprotNodeType,
     UniprotNodeField,
 )
+from otar_biocypher.target_disease_evidence_adapter import (
+    TargetDiseaseEvidenceAdapter,
+    TargetDiseaseDataset,
+    TargetNodeField,
+    DiseaseNodeField,
+    TargetDiseaseEdgeField,
+    GeneOntologyNodeField,
+    MousePhenotypeNodeField,
+    MouseTargetNodeField,
+)
 
 bc = BioCypher()
 
