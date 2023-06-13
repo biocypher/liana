@@ -17,6 +17,8 @@ from otar_biocypher.target_disease_evidence_adapter import (
 
 bc = BioCypher()
 
+# Uniprot
+
 uniprot_node_types = [
     UniprotNodeType.PROTEIN,
     UniprotNodeType.GENE,
@@ -51,8 +53,86 @@ uniprot_adapter = Uniprot(
 
 uniprot_adapter.download_uniprot_data(cache = True)
 
+# Open Targets
+
+target_disease_datasets = [
+    TargetDiseaseDataset.CANCER_BIOMARKERS,
+    TargetDiseaseDataset.CANCER_GENE_CENSUS,
+    TargetDiseaseDataset.CHEMBL,
+    TargetDiseaseDataset.CLINGEN,
+    TargetDiseaseDataset.CRISPR,
+    TargetDiseaseDataset.EUROPE_PMC,
+    TargetDiseaseDataset.EVA,
+    TargetDiseaseDataset.EVA_SOMATIC,
+    TargetDiseaseDataset.EXPRESSION_ATLAS,
+    TargetDiseaseDataset.GENOMICS_ENGLAND,
+    TargetDiseaseDataset.GENE_BURDEN,
+    TargetDiseaseDataset.GENE2PHENOTYPE,
+    TargetDiseaseDataset.IMPC,
+    TargetDiseaseDataset.INTOGEN,
+    TargetDiseaseDataset.ORPHANET,
+    TargetDiseaseDataset.OT_GENETICS_PORTAL,
+    TargetDiseaseDataset.PROGENY,
+    TargetDiseaseDataset.REACTOME,
+    TargetDiseaseDataset.SLAP_ENRICH,
+    TargetDiseaseDataset.SYSBIO,
+    TargetDiseaseDataset.UNIPROT_VARIANTS,
+    TargetDiseaseDataset.UNIPROT_LITERATURE,
+]
+
+target_disease_node_fields = [
+    # mandatory fields
+    TargetNodeField.TARGET_GENE_ENSG,
+    DiseaseNodeField.DISEASE_ACCESSION,
+    GeneOntologyNodeField.GENE_ONTOLOGY_ACCESSION,
+    MousePhenotypeNodeField.MOUSE_PHENOTYPE_ACCESSION,
+    MouseTargetNodeField.MOUSE_TARGET_ENSG,
+    # optional target (gene) fields
+    TargetNodeField.TARGET_GENE_SYMBOL,
+    TargetNodeField.TARGET_GENE_BIOTYPE,
+    # optional disease fields
+    DiseaseNodeField.DISEASE_CODE,
+    DiseaseNodeField.DISEASE_NAME,
+    DiseaseNodeField.DISEASE_DESCRIPTION,
+    DiseaseNodeField.DISEASE_ONTOLOGY,
+    # optional gene ontology fields
+    GeneOntologyNodeField.GENE_ONTOLOGY_NAME,
+]
+
+target_disease_edge_fields = [
+    # mandatory fields
+    TargetDiseaseEdgeField.INTERACTION_ACCESSION,
+    TargetDiseaseEdgeField.TARGET_GENE_ENSG,
+    TargetDiseaseEdgeField.DISEASE_ACCESSION,
+    TargetDiseaseEdgeField.TYPE,
+    TargetDiseaseEdgeField.SOURCE,
+    # optional fields
+    TargetDiseaseEdgeField.SCORE,
+    TargetDiseaseEdgeField.LITERATURE,
+]
+
+target_disease_adapter = TargetDiseaseEvidenceAdapter(
+    datasets=target_disease_datasets,
+    node_fields=target_disease_node_fields,
+    edge_fields=target_disease_edge_fields,
+    test_mode=True,
+)
+
+target_disease_adapter.load_data(
+    stats=False,
+    show_nodes=False,
+    show_edges=False,
+)
+
+# Write nodes and edges
+
 bc.write_nodes(uniprot_adapter.get_nodes())
-bc.write_edges(uniprot_adapter.get_edges())
+bc.write_nodes(target_disease_adapter.get_nodes())
+
+# bc.write_edges(uniprot_adapter.get_edges())
+# bc.write_edges(target_disease_adapter.get_edges())
+
+# Import call and summary
 
 bc.write_import_call()
 bc.summary()
