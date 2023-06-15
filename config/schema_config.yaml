@@ -8,6 +8,16 @@ gene:
     ensembl: str[]
     ensembl_gene_ids: str[]
 
+disease:
+  represented_as: node
+  preferred_id: [mondo, efo, hp, orphanet, otar, oba, ncit, doid, obi, ogms]
+  label_in_input: [mondo, efo, hp, orphanet, otar, oba, ncit, doid, obi, ogms]
+  properties:
+    code: str
+    name: str
+    description: str
+    ontology: str
+
 protein:
   represented_as: node
   preferred_id: uniprot
@@ -100,3 +110,32 @@ protein to cellular component association:
   represented_as: edge
   is_a: association
   label_in_input: Found_in
+
+gene to disease association:
+  represented_as: edge
+  preferred_id: [
+    affected pathway, 
+    somatic mutation, 
+    genetic association, 
+    literature,
+    animal model,
+    known drug,
+    rna expression,
+  ]
+  label_in_input: [
+    affected_pathway, 
+    somatic_mutation, 
+    genetic_association,
+    literature,
+    animal_model,
+    known_drug,
+    rna_expression,
+  ]
+  properties:
+    literature: str[]
+    score: double
+
+gene to protein relationship:
+  is_a: gene to gene product relationship
+  represented_as: edge
+  label_in_input: Encodes

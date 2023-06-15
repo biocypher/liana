@@ -41,17 +41,17 @@ uniprot_node_fields = [
     UniprotNodeField.PROTEIN_ENTREZ_GENE_IDS,
     UniprotNodeField.PROTEIN_VIRUS_HOSTS,
     UniprotNodeField.PROTEIN_KEGG_IDS,
-    UniprotNodeField.PROTEIN_SUBCELLULAR_LOCATION
+    UniprotNodeField.PROTEIN_SUBCELLULAR_LOCATION,
 ]
 
 uniprot_adapter = Uniprot(
-        organism="9606",
-        node_types=uniprot_node_types,
-        node_fields=uniprot_node_fields,
-        test_mode=True,
-    )
+    organism="9606",
+    node_types=uniprot_node_types,
+    node_fields=uniprot_node_fields,
+    test_mode=False,
+)
 
-uniprot_adapter.download_uniprot_data(cache = True)
+uniprot_adapter.download_uniprot_data(cache=True)
 
 # Open Targets
 
@@ -115,7 +115,7 @@ target_disease_adapter = TargetDiseaseEvidenceAdapter(
     datasets=target_disease_datasets,
     node_fields=target_disease_node_fields,
     edge_fields=target_disease_edge_fields,
-    test_mode=True,
+    test_mode=False,
 )
 
 target_disease_adapter.load_data(
@@ -129,8 +129,10 @@ target_disease_adapter.load_data(
 bc.write_nodes(uniprot_adapter.get_nodes())
 bc.write_nodes(target_disease_adapter.get_nodes())
 
-# bc.write_edges(uniprot_adapter.get_edges())
-# bc.write_edges(target_disease_adapter.get_edges())
+bc.write_edges(uniprot_adapter.get_edges())
+batches = target_disease_adapter.get_edge_batches()
+for batch in batches:
+    bc.write_edges(target_disease_adapter.get_edges(batch_number=batch))
 
 # Import call and summary
 
