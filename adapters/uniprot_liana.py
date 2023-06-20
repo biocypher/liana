@@ -314,8 +314,15 @@ class Uniprot:
                 for protein, attribute_value in self.data.get(arg).items():
                     individual_protein_locations = []
                     for element in attribute_value:
-                        individual_protein_locations.append(element.location)
-                        self.locations.add(element.location)
+                        loc = (
+                            str(element.location)
+                            .replace("'", "")
+                            .replace("[", "")
+                            .replace("]", "")
+                            .strip()
+                        )
+                        individual_protein_locations.append(loc)
+                        self.locations.add(loc)
 
                     self.data[arg][protein] = individual_protein_locations
 
@@ -372,11 +379,10 @@ class Uniprot:
                         organism_props,
                     )
 
-            # append subcellular locations as nodes
-            if UniprotNodeType.CELLULAR_COMPARTMENT in self.node_types:
-                for location in self.locations:
-                    if location:
-                        yield (location, "location", {})
+        # append subcellular locations as nodes
+        if UniprotNodeType.CELLULAR_COMPARTMENT in self.node_types:
+            for location in self.locations:
+                yield (location, "location", {})
 
     def get_edges(self):
         """
