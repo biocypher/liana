@@ -511,7 +511,7 @@ et-xmlfile = "*"
 
 [[package]]
 name = "otar-biocypher"
-version = "0.1.1"
+version = "0.1.2"
 description = "BioCypher Open Targets Knowledge Graph adapter"
 category = "main"
 optional = false
@@ -531,7 +531,7 @@ snakeviz = "^2.1.1"
 type = "git"
 url = "https://github.com/biocypher/open-targets.git"
 reference = "main"
-resolved_reference = "cfbade9c1cbca33a11d16a035b230659a8040f41"
+resolved_reference = "5b17cc3bbcfba6543c41b8988174e8973748f7e8"
 
 [[package]]
 name = "packaging"
