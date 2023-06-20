@@ -94,7 +94,6 @@ target_disease_node_fields = [
     DiseaseNodeField.DISEASE_CODE,
     DiseaseNodeField.DISEASE_NAME,
     DiseaseNodeField.DISEASE_DESCRIPTION,
-    DiseaseNodeField.DISEASE_ONTOLOGY,
     # optional gene ontology fields
     GeneOntologyNodeField.GENE_ONTOLOGY_NAME,
 ]
@@ -127,12 +126,12 @@ target_disease_adapter.load_data(
 # Write nodes and edges
 
 bc.write_nodes(uniprot_adapter.get_nodes())
-bc.write_nodes(target_disease_adapter.get_nodes())
+# bc.write_nodes(target_disease_adapter.get_nodes())
 
-bc.write_edges(uniprot_adapter.get_edges())
-batches = target_disease_adapter.get_edge_batches()
-for batch in batches:
-    bc.write_edges(target_disease_adapter.get_edges(batch_number=batch))
+# bc.write_edges(uniprot_adapter.get_edges())
+# batches = target_disease_adapter.get_edge_batches()
+# for batch in batches:
+#     bc.write_edges(target_disease_adapter.get_edges(batch_number=batch))
 
 # Import call and summary
 
