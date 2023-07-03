@@ -3,6 +3,7 @@ from adapters.uniprot_liana import (
     Uniprot,
     UniprotNodeType,
     UniprotNodeField,
+    UniprotEdgeField,
 )
 from otar_biocypher.target_disease_evidence_adapter import (
     TargetDiseaseEvidenceAdapter,
@@ -44,10 +45,13 @@ uniprot_node_fields = [
     UniprotNodeField.PROTEIN_SUBCELLULAR_LOCATION,
 ]
 
+uniprot_edge_fields = [UniprotEdgeField.GENE_ENSEMBL_GENE_ID]
+
 uniprot_adapter = Uniprot(
     organism="9606",
     node_types=uniprot_node_types,
     node_fields=uniprot_node_fields,
+    edge_fields=uniprot_edge_fields,
     test_mode=False,
 )
 
@@ -126,12 +130,12 @@ target_disease_adapter.load_data(
 # Write nodes and edges
 
 bc.write_nodes(uniprot_adapter.get_nodes())
-# bc.write_nodes(target_disease_adapter.get_nodes())
+bc.write_nodes(target_disease_adapter.get_nodes())
 
-# bc.write_edges(uniprot_adapter.get_edges())
-# batches = target_disease_adapter.get_edge_batches()
-# for batch in batches:
-#     bc.write_edges(target_disease_adapter.get_edges(batch_number=batch))
+bc.write_edges(uniprot_adapter.get_edges())
+batches = target_disease_adapter.get_edge_batches()
+for batch in batches:
+    bc.write_edges(target_disease_adapter.get_edges(batch_number=batch))
 
 # Import call and summary
 
