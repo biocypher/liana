@@ -129,6 +129,9 @@ target_disease_adapter.load_data(
 
 # Write nodes and edges
 
+# uniprot/pypath are ground truth of genes, but we also use genes from open
+# targets, so the order is important (only genes not in uniprot/pypath will be
+# added from open targets)
 bc.write_nodes(uniprot_adapter.get_nodes(ligand_or_receptor=True))
 bc.write_nodes(target_disease_adapter.get_nodes())
 
