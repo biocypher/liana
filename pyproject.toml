@@ -11,9 +11,10 @@ python = "^3.10"
 biocypher = "0.5.17"
 tqdm = "^4.65.0"
 bioregistry = "^0.6.93"
-pypath-omnipath = "^0.14.44"
+pypath-omnipath = "^0.15.4"
 psutil = "^5.9.4"
 otar-biocypher = { git = "https://github.com/biocypher/open-targets.git", branch = "main" }
+bccb = { git = "https://github.com/HUBioDataLab/CROssBAR-BioCypher-Migration.git", branch = "main" }
 
 [build-system]
 requires = ["poetry-core"]

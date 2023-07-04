@@ -1,5 +1,5 @@
 from biocypher import BioCypher
-from adapters.uniprot_liana import (
+from bccb.uniprot_adapter import (
     Uniprot,
     UniprotNodeType,
     UniprotNodeField,
@@ -129,7 +129,7 @@ target_disease_adapter.load_data(
 
 # Write nodes and edges
 
-bc.write_nodes(uniprot_adapter.get_nodes())
+bc.write_nodes(uniprot_adapter.get_nodes(ligand_or_receptor=True))
 bc.write_nodes(target_disease_adapter.get_nodes())
 
 bc.write_edges(uniprot_adapter.get_edges())

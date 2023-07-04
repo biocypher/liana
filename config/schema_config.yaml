@@ -1,11 +1,11 @@
 gene:
   represented_as: node
-  preferred_id: ncbigene
-  label_in_input: gene
+  preferred_id: ensembl
+  label_in_input: [gene, ensembl]
   properties:    
-    genes: str[]
-    kegg: str[]
-    ensembl: str[]
+    gene_names: str[]
+    xref_kegg: str[]
+    xref_ensembl: str[]
     ensembl_gene_ids: str[]
 
 disease:
@@ -26,8 +26,8 @@ protein:
     secondary_ids: str[]
     length: int
     mass: int
-    protein_names: str[]
-    proteome: str[]
+    protein_name: str[]
+    xref_proteomes: str[]
     organism_id: int
     ec: str[]
     virus_hosts: int[]
@@ -63,7 +63,7 @@ receptor protein:
 organism taxon:
   represented_as: node
   preferred_id: ncbitaxon
-  label_in_input: organism
+  label_in_input: organism_name
   properties:
     organism: str
 
