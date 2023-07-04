@@ -52,7 +52,7 @@ uniprot_adapter = Uniprot(
     node_types=uniprot_node_types,
     node_fields=uniprot_node_fields,
     edge_fields=uniprot_edge_fields,
-    test_mode=False,
+    test_mode=True,
 )
 
 uniprot_adapter.download_uniprot_data(cache=True)
@@ -118,7 +118,7 @@ target_disease_adapter = TargetDiseaseEvidenceAdapter(
     datasets=target_disease_datasets,
     node_fields=target_disease_node_fields,
     edge_fields=target_disease_edge_fields,
-    test_mode=False,
+    test_mode=True,
 )
 
 target_disease_adapter.load_data(
