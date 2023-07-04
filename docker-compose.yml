@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   build:
-    image: docker.io/slobentanzer/biocypher-base:1.0.0
+    image: docker.io/slobentanzer/biocypher-base:1.1.1
     container_name: build
     volumes:
       - biocypher-liana_data:/usr/app/data
