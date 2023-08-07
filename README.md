@@ -58,3 +58,16 @@ by running `poetry shell` followed by `pip list`, noting the version of pycurl,
 and then running `pip install --compile --install-option="--with-openssl"
 --upgrade --force-reinstall pycurl==<version>` to provide the correct SSL
 backend.
+
+## Docker
+
+You can also run the workflow in a Docker compose setup by using the provided
+`docker-compose.yml` file. This will start a three-step process that builds the
+KG, imports the data into Neo4j and starts a read-only Neo4j server. To run,
+execute the following command in the root of the project:
+
+```bash
+docker compose up (-d)
+```
+
+You can add the `-d` flag to run the process in the background.
