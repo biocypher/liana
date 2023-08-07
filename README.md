@@ -42,7 +42,7 @@ These are `ligands_curated.csv`, `receptors_curated.csv` and
 ## Usage
 
 ```bash
-poetry run create_knowledge_graph.py
+poetry run python create_knowledge_graph.py
 ```
 
 ## Note about pycurl
